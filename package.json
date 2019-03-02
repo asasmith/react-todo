@@ -7,7 +7,8 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server --mode development --hot",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "test-watch": "jest --watch"
   },
   "devDependencies": {
     "@babel/core": "^7.3.4",
