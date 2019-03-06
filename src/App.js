@@ -6,6 +6,7 @@ export default class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      todoInputVal: '',
       todos: [
         {
           text: 'testing',
@@ -14,12 +15,18 @@ export default class App extends Component {
       ],
       taskInputVal: '',
     }
+
+    this.handleChange = this.handleChange.bind(this)
+  }
+
+  handleChange(e) {
+    this.setState({todoInputVal: e.target.value})
   }
 
   render () {
     return (
       <div>
-        <TaskInput />
+        <TaskInput inputVal={this.state.todoInputVal} change={this.handleChange} />
         <TodoList todos={this.state.todos} />
       </div>
     )
