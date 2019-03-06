@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import TaskInput from './components/TaskInput'
+import TodoInput from './components/TodoInput'
 import TodoList from './components/TodoList'
 
 export default class App extends Component {
@@ -26,7 +26,7 @@ export default class App extends Component {
   render () {
     return (
       <div>
-        <TaskInput inputVal={this.state.todoInputVal} change={this.handleChange} />
+        <TodoInput inputVal={this.state.todoInputVal} change={this.handleChange} />
         <TodoList todos={this.state.todos} />
       </div>
     )

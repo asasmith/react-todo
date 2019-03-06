@@ -1,6 +1,6 @@
 import React from 'react'
 
-const TaskInput = (props) => {
+const TodoInput = (props) => {
   return (
     <div>
       <input data-testid='task-input' placeholder='add a task' value={props.inputVal} onChange={props.change} />
@@ -9,4 +9,4 @@ const TaskInput = (props) => {
   )
 }
 
-export default TaskInput
+export default TodoInput

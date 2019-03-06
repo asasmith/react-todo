@@ -1,10 +1,10 @@
 import React from 'react'
 import { render } from 'react-testing-library'
-import TaskInput from './TaskInput'
+import TodoInput from './TodoInput'
 
-test('<TaskInput />', () => {
-  const { getByTestId } = render(<TaskInput />)
-  const taskInput = getByTestId('task-input')
+test('<TodoInput />', () => {
+  const { getByTestId } = render(<TodoInput />)
+  const todoInput = getByTestId('todo-input')
 
-  expect(taskInput.tagName).toBe('INPUT')
+  expect(todoInput.tagName).toBe('INPUT')
 })
