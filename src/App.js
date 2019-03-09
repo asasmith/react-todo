@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import TodoInput from './components/TodoInput'
-import TodoList from './components/TodoList'
+import TodoListItem from './components/TodoListItem'
 
 export default class App extends Component {
   constructor(props) {
@@ -10,21 +10,26 @@ export default class App extends Component {
       todos: [
         {
           text: 'testing',
+          isCompleted: true,
+        },
+        {
+          text: 'another test',
           isCompleted: false,
         },
       ],
       taskInputVal: '',
     }
 
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleInputChange = this.handleInputChange.bind(this)
+    this.handleInputSubmit = this.handleInputSubmit.bind(this)
+    this.handleToggleCompleted = this.handleToggleCompleted.bind(this)
   }
 
-  handleChange(e) {
+  handleInputChange(e) {
     this.setState({todoInputVal: e.target.value})
   }
 
-  handleSubmit(e) {
+  handleInputSubmit(e) {
     const newTodo = {
       text: e.target.previousElementSibling.value,
       isCompleted: false,
@@ -39,11 +44,38 @@ export default class App extends Component {
     )
   }
 
+  handleToggleCompleted(i) {
+    const todos = [...this.state.todos]
+    
+    todos[i].isCompleted = !todos[i].isCompleted
+    this.setState({
+      todos: [...todos],
+    })
+  }
+
+  // statically render items in state
+  // convert this to dynamically render instead of using .map in the render method?
+  renderListItems(i) {
+    return (
+      <TodoListItem
+        value={this.state.todos[i]}
+        onClick={() => this.handleToggleCompleted(i)} 
+      />
+    )
+  }
+
   render () {
     return (
       <div>
-        <TodoInput inputVal={this.state.todoInputVal} change={this.handleChange} submit={this.handleSubmit} />
-        <TodoList todos={this.state.todos} />
+        <TodoInput inputVal={this.state.todoInputVal} onChange={this.handleInputChange} onSubmit={this.handleInputSubmit} />
+        <ul>
+          {/* not sure how I feel about this being here */}
+          {/* move this logic to a method like renderListItems? */}
+          {/* or move it to the child component? */}
+          {this.state.todos.map((todo, index) => {
+            return <TodoListItem value={todo} key={index} onClick={() => this.handleToggleCompleted(index)} />
+          })}
+        </ul>
       </div>
     )
   }
